@@ -1,12 +1,17 @@
+"use client";
+
 // import Image from "next/image";
 // import styles from "./page.module.css";
-import Spinner from "./components/Spinner/Spinner";
+import Header from './components/Header/Header';
+import DistrictsSelect from './components/DistrictsSelect/DistrictsSelect';
 
 export default function Home() {
-  return (
-    <div >
-        <h1>Hola </h1>
-        <Spinner/>
-    </div>
-  );
+
+
+    return (
+        <div >
+            <Header />
+            <DistrictsSelect />
+        </div>
+    );
 }
