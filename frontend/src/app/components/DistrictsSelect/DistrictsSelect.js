@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { MenuItem, Select, FormControl, InputLabel } from "@mui/material";
 import styled from "@emotion/styled";
-import districts from "../../../utils/districts.json"
+import districts from "../../../utils/districts.json";
 
 const StyledFormControl = styled(FormControl)`
   min-width: 200px;
@@ -12,7 +12,7 @@ const StyledFormControl = styled(FormControl)`
 
 // TODO: Añadir opción de buscar por todos los distritos, y que esta sea la opción por defecto
 
-export default function DistrictSelect() {
+function DistrictSelect() {
     const [selectedDistrict, setSelectedDistrict] = useState("");
 
     const handleChange = (event) => {
@@ -41,3 +41,5 @@ export default function DistrictSelect() {
         </StyledFormControl>
     );
 }
+
+export default DistrictSelect;

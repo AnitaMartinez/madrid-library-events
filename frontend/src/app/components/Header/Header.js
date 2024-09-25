@@ -17,7 +17,7 @@ const HeaderTitle = styled(Typography)`
   }
 `;
 
-export default function Header() {
+function Header() {
     return (
         <HeaderContainer position="static">
             <Toolbar sx={{
@@ -32,3 +32,5 @@ export default function Header() {
         </HeaderContainer>
     );
 }
+
+export default Header;

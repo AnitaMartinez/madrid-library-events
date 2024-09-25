@@ -1,4 +1,5 @@
 'use client';
+
 import { createTheme } from '@mui/material/styles';
 import '@fontsource/montserrat';
 import '@fontsource/open-sans';

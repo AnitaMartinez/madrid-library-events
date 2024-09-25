@@ -1,17 +1,47 @@
 "use client";
-
-// import Image from "next/image";
-// import styles from "./page.module.css";
+import { useMemo, useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Header from './components/Header/Header';
 import DistrictsSelect from './components/DistrictsSelect/DistrictsSelect';
+import { getEvents } from "@/services/libraryEventsAPI";
 
-export default function Home() {
 
+function App() {
+    const [libraryEvents, setLibraryEvents] = useState([])
+
+    const Map = useMemo(() => dynamic(
+        () => import('./components/Map/Map'),
+        { loading: () => <p>A map is loading</p>, ssr: false }
+    ), [])
+
+    const setAllEvents = async () => {
+        try {
+            const data = await getEvents();
+            console.log(data);
+            setLibraryEvents(data); // Aquí tengo ya los eventos de las bibliotecas
+            // if (data.length === 0) setError('No hay eventos')
+        } catch (err) {
+            console.error(err)
+        }
+    }
+
+    useEffect(() => {
+        const init = async () => {
+            await setAllEvents();
+        }
+        init();
+
+    }, []);
 
     return (
-        <div >
+        < >
             <Header />
-            <DistrictsSelect />
-        </div>
+            <main>
+                <DistrictsSelect />
+                <Map />
+            </main>
+        </>
     );
 }
+
+export default App;
