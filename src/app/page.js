@@ -7,7 +7,8 @@ import { getEvents } from "@/services/libraryEventsAPI";
 
 
 function App() {
-    const [libraryEvents, setLibraryEvents] = useState([])
+    const [libraryEvents, setLibraryEvents] = useState([]);
+    const [isByDistrict, setIsByDistrict] = useState(false);
 
     const Map = useMemo(() => dynamic(
         () => import('./components/Map/Map'),
@@ -16,6 +17,7 @@ function App() {
 
     const setAllEvents = async () => {
         try {
+            setIsByDistrict(false);
             const data = await getEvents();
             setLibraryEvents(data); // Aquí tengo ya los eventos de las bibliotecas
             // if (data.length === 0) setError('No hay eventos')
@@ -26,8 +28,10 @@ function App() {
 
     const handleSelectDistrict = async (district) => {
         try {
+            setIsByDistrict(true);
             const data = await getEvents({ district });
             setLibraryEvents(data);
+            // if (data.length === 0) setError('No hay eventos')
         } catch (err) {
             console.error(err)
         }
@@ -47,7 +51,7 @@ function App() {
             <Header />
             <main>
                 <DistrictsSelect onSelectDistrict={handleSelectDistrict} />
-                <Map libraryEvents={libraryEvents} />
+                <Map isByDistrict={isByDistrict} libraryEvents={libraryEvents} />
             </main>
         </>
     );
