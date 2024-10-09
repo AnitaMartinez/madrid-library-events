@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { MenuItem, Select, FormControl, InputLabel } from "@mui/material";
+import { MenuItem, Select, FormControl, InputLabel, CircularProgress, ArrowDropDownIcon } from "@mui/material";
 import styled from "@emotion/styled";
 import districts from "../../../utils/districts.json";
 
@@ -10,9 +10,14 @@ const StyledFormControl = styled(FormControl)`
   margin: 16px 0;
 `;
 
+const StyledCircularProgress = styled(CircularProgress)`
+    margin-right: 12px;
+`;
+
+
 // TODO: Añadir opción de buscar por todos los distritos, y que esta sea la opción por defecto
 
-function DistrictSelect({ onSelectDistrict }) {
+function DistrictSelect({ onSelectDistrict, loading }) {
     const [selectedDistrict, setSelectedDistrict] = useState("");
 
     const handleChange = (event) => {
@@ -33,14 +38,18 @@ function DistrictSelect({ onSelectDistrict }) {
                 sx={{
                     color: 'text.primary',
                 }}
+                IconComponent={loading ? () => <StyledCircularProgress size={24} /> : ArrowDropDownIcon}
             >
+                <MenuItem value="">
+                    Todos los distritos
+                </MenuItem>
                 {Object.entries(districts).map(([key, value]) => (
                     <MenuItem key={key} value={value}>
                         {value}
                     </MenuItem>
                 ))}
             </Select>
-        </StyledFormControl>
+        </StyledFormControl >
     );
 }
 

@@ -19,8 +19,7 @@ function SetZoom({ zoom, center }) {
     return null;
 }
 
-function Map({ libraryEvents = [], isByDistrict }) {
-    console.log("🚀 ~ Map ~ libraryEvents:", libraryEvents)
+function Map({ libraryEvents, isByDistrict }) {
     const zoom = isByDistrict ? 13 : 12;
 
     const eventCoordenates = isByDistrict ? libraryEvents?.length > 0 && libraryEvents[0]?.coordenates : coordsMadrid;
@@ -41,7 +40,7 @@ function Map({ libraryEvents = [], isByDistrict }) {
                     attribution={attributionOpenStreetMap.attribution}
                 />
                 {
-                    libraryEvents.map(event => {
+                    ((libraryEvents || libraryEvents.length) || []).map(event => {
                         const position = [
                             event.coordenates ? event.coordenates.latitude : coordsMadrid.latitude,
                             event.coordenates ? event.coordenates.longitude : coordsMadrid.longitude,
