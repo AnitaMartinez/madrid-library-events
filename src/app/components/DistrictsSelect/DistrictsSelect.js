@@ -12,11 +12,13 @@ const StyledFormControl = styled(FormControl)`
 
 // TODO: Añadir opción de buscar por todos los distritos, y que esta sea la opción por defecto
 
-function DistrictSelect() {
+function DistrictSelect({ onSelectDistrict }) {
     const [selectedDistrict, setSelectedDistrict] = useState("");
 
     const handleChange = (event) => {
-        setSelectedDistrict(event.target.value);
+        const district = event.target.value
+        setSelectedDistrict(district);
+        onSelectDistrict(district);
     };
 
     return (

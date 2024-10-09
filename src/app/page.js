@@ -17,12 +17,15 @@ function App() {
     const setAllEvents = async () => {
         try {
             const data = await getEvents();
-            console.log(data);
             setLibraryEvents(data); // Aquí tengo ya los eventos de las bibliotecas
             // if (data.length === 0) setError('No hay eventos')
         } catch (err) {
             console.error(err)
         }
+    }
+
+    const handleSelectDistrict = () => {
+
     }
 
     useEffect(() => {
@@ -37,8 +40,8 @@ function App() {
         < >
             <Header />
             <main>
-                <DistrictsSelect />
-                <Map />
+                <DistrictsSelect onSelectDistrict={handleSelectDistrict} />
+                <Map libraryEvents={libraryEvents} />
             </main>
         </>
     );

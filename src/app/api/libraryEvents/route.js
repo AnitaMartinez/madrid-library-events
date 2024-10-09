@@ -1,4 +1,4 @@
-import parseData from "./parse";
+import parseData from "./modules/parse";
 
 export async function GET() {
     const urlAllEvents = 'https://datos.madrid.es/egob/catalogo/206717-0-agenda-eventos-bibliotecas.json';

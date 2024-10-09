@@ -2,6 +2,7 @@
 
 import { attributionOpenStreetMap } from '@/utils/attributionOpenStreetMap';
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import ContentMapPopup from '../ContentMapPopup/ContentMapPopup';
 
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
@@ -12,7 +13,7 @@ export const coordsMadrid = {
     longitude: -3.703494,
 }
 
-function Map() {
+function Map({ libraryEvents = [] }) {
 
     return (
         <div style={{ height: "500px", width: "100%" }} >
@@ -25,9 +26,22 @@ function Map() {
                     url={attributionOpenStreetMap.url}
                     attribution={attributionOpenStreetMap.attribution}
                 />
-                <Marker position={[coordsMadrid.latitude, coordsMadrid.longitude]} draggable={false}>
-                    <Popup>Hey</Popup>
-                </Marker>
+                {
+                    libraryEvents.map(event => {
+                        const position = [
+                            event.coordenates ? event.coordenates.latitude : coordsMadrid.latitude,
+                            event.coordenates ? event.coordenates.longitude : coordsMadrid.longitude,
+                        ]
+                        return (
+                            <Marker key={event.id} position={position} draggable={false}>
+                                <Popup>
+                                    <ContentMapPopup libraryEvent={event} />
+                                </Popup>
+                            </Marker>
+                        )
+                    })
+                }
+
             </MapContainer>
         </div>
     );
