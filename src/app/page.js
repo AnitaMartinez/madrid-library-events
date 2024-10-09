@@ -24,7 +24,13 @@ function App() {
         }
     }
 
-    const handleSelectDistrict = () => {
+    const handleSelectDistrict = async (district) => {
+        try {
+            const data = await getEvents({ district });
+            setLibraryEvents(data);
+        } catch (err) {
+            console.error(err)
+        }
 
     }
 
